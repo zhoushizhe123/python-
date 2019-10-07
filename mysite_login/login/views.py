@@ -76,3 +76,21 @@ def hash_code(s,salt='mysite_login'):
     s += salt
     h.update(s.encode())
     return h.hexdigest()
+
+def wx(request):
+    ctx={}
+    if request.POST:
+        ctx['rlt']=request.POST['q']
+        get_vars = {'url': request.POST['q']}
+        r = requests.get("https://tgops0.com/tools/checkWx", params=get_vars)
+        ctx['rlt'] = r.text
+    return render(request,'login/wx.html',ctx)
+
+def qq(request):
+    ctx={}
+    if request.POST:
+        ctx['rlt']=request.POST['q']
+        get_vars = {'url': request.POST['q']}
+        r = requests.get("https://tgops0.com/tools/checkQQ", params=get_vars)
+        ctx['rlt'] = r.text
+    return render(request,'login/qq.html',ctx)
