@@ -3,11 +3,18 @@ from django.shortcuts import render,redirect
 from . import models
 from .forms import UserForm,RegisterForm
 import hashlib
+import requests
 
 
 def index(request):
-    pass
-    return render(request,'login/index.html')
+    ctx={}
+    if request.POST:
+        ctx['rlt']=request.POST['q']
+        get_vars={'key':'14867e0f81fd4a93b9f709f780cffc2c','domainName':request.POST['q']}
+        get_url="http://apidata.chinaz.com/CallAPI/Domain"
+        r=requests.get(get_url,params=get_vars).text
+        ctx['rlt']=r
+    return render(request,'login/index.html',ctx)
 
 def login(request):
     if request.method=="POST":
