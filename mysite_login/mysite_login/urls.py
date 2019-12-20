@@ -26,5 +26,5 @@ urlpatterns = [
     re_path(r'^logout/', views.logout),
     re_path(r'^captcha',include('captcha.urls')),
     re_path(r'^wx/',views.wx),
-    re_path(r'^qq/',views.wx),
+    re_path(r'^qq/',views.qq),
 ]
